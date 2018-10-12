@@ -94,15 +94,20 @@
 
 
 
+<meta name="description" content="进程与线程进程与线程属于操作系统知识范畴，这里仅仅做个概述：   程序：存储在磁盘上某个目录中的可执行文件。 进程：程序的执行实例，如word程序，运行后就是一个word进程，是资源分配的最小单位 线程：程序执行的最小单位，一个进程内的多个线程共享同一地址空间。 1个程序 ==&amp;gt; 1个进程==&amp;gt; n个线程   linux内存管理内存管理是个很复杂的过程，如果展开来说不是一篇文章就能说得">
 <meta name="keywords" content="Linux,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 进程虚拟地址空间">
 <meta property="og:url" content="http://blog.lovezhangli.top/2018/09/27/linux-process-virtual-addr-space/index.html">
 <meta property="og:site_name" content="Xu He&#39;s blog">
+<meta property="og:description" content="进程与线程进程与线程属于操作系统知识范畴，这里仅仅做个概述：   程序：存储在磁盘上某个目录中的可执行文件。 进程：程序的执行实例，如word程序，运行后就是一个word进程，是资源分配的最小单位 线程：程序执行的最小单位，一个进程内的多个线程共享同一地址空间。 1个程序 ==&amp;gt; 1个进程==&amp;gt; n个线程   linux内存管理内存管理是个很复杂的过程，如果展开来说不是一篇文章就能说得">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-27T03:09:19.743Z">
+<meta property="og:image" content="http://blog.lovezhangli.top/images/linux-process.jpg">
+<meta property="og:updated_time" content="2018-10-12T10:15:11.616Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 进程虚拟地址空间">
+<meta name="twitter:description" content="进程与线程进程与线程属于操作系统知识范畴，这里仅仅做个概述：   程序：存储在磁盘上某个目录中的可执行文件。 进程：程序的执行实例，如word程序，运行后就是一个word进程，是资源分配的最小单位 线程：程序执行的最小单位，一个进程内的多个线程共享同一地址空间。 1个程序 ==&amp;gt; 1个进程==&amp;gt; n个线程   linux内存管理内存管理是个很复杂的过程，如果展开来说不是一篇文章就能说得">
+<meta name="twitter:image" content="http://blog.lovezhangli.top/images/linux-process.jpg">
 
 
 
@@ -337,7 +342,34 @@
       
 
       
-        
+        <h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><p>进程与线程属于操作系统知识范畴，这里仅仅做个概述：</p>
+<blockquote>
+<ul>
+<li>程序：存储在磁盘上某个目录中的可执行文件。</li>
+<li>进程：程序的执行实例，如word程序，运行后就是一个word进程，是<strong>资源分配的最小单位</strong></li>
+<li>线程：<strong>程序执行的最小单位</strong>，一个进程内的多个线程共享同一地址空间。</li>
+<li>1个程序 ==&gt; 1个进程==&gt; n个线程</li>
+</ul>
+</blockquote>
+<h3 id="linux内存管理"><a href="#linux内存管理" class="headerlink" title="linux内存管理"></a>linux内存管理</h3><p>内存管理是个很复杂的过程，如果展开来说不是一篇文章就能说得清楚的，这里仅仅为进程空间做个背景介绍：</p>
+<blockquote>
+</blockquote>
+<ul>
+<li>虚拟内存：</li>
+<li>系统调用：程序向内核请求服务的入口点。<ul>
+<li>不同OS不同版本提供的系统调用个数不同；</li>
+<li>linux为每个系统调用在标准C库里提供一个同名称的函数，函数再进行系统调用；</li>
+<li>从应用角度考虑，可将系统调用视为库函数；但库函数并不是内核的入口点。</li>
+</ul>
+</li>
+</ul>
+<h3 id="进程虚拟地址空间"><a href="#进程虚拟地址空间" class="headerlink" title="进程虚拟地址空间"></a>进程虚拟地址空间</h3><p>既然进程是程序运行时资源分配的最小单位，每个程序在运行时，OS会统一分配内存，所以进程的虚拟内存大小随OS不同而不同：</p>
+<blockquote>
+<p>32位操作系统，4G虚拟地址空间<br>64位操作系统，几十G上百G</p>
+</blockquote>
+<p>进程虚拟地址结构：<br>    每个进程的虚拟地址空间包含两部分，一部分是所有进程共享的空间，称为内核地址空间，映射到固定的物理内存；另一部分则是每个尽责独享的空间，称为用户空间。</p>
+<p><img src="http://blog.lovezhangli.top/images/linux-process.jpg" alt=""></p>
+
       
     </div>
     
@@ -435,8 +467,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/xuhe.jpeg"
@@ -451,7 +492,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -515,6 +556,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与线程"><span class="nav-number">1.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux内存管理"><span class="nav-number">2.</span> <span class="nav-text">linux内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程虚拟地址空间"><span class="nav-number">3.</span> <span class="nav-text">进程虚拟地址空间</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

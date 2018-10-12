@@ -94,15 +94,18 @@
 
 
 
+<meta name="description" content="概念  redundancy/failover: 冗余，故障转移 HA： 高可用 load-balance：负载均衡 cluster： 集群 master/slave: 主从  The primary purpose of load balancing is to distribute the work load of an application onto multiple computers,">
 <meta name="keywords" content="Architecture">
 <meta property="og:type" content="article">
-<meta property="og:title" content="谈restful">
-<meta property="og:url" content="http://blog.lovezhangli.top/2018/10/07/restful/index.html">
+<meta property="og:title" content="load-balance">
+<meta property="og:url" content="http://blog.lovezhangli.top/2018/10/10/load-balance/index.html">
 <meta property="og:site_name" content="Xu He&#39;s blog">
+<meta property="og:description" content="概念  redundancy/failover: 冗余，故障转移 HA： 高可用 load-balance：负载均衡 cluster： 集群 master/slave: 主从  The primary purpose of load balancing is to distribute the work load of an application onto multiple computers,">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-07T14:13:00.302Z">
+<meta property="og:updated_time" content="2018-10-12T02:33:40.231Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="谈restful">
+<meta name="twitter:title" content="load-balance">
+<meta name="twitter:description" content="概念  redundancy/failover: 冗余，故障转移 HA： 高可用 load-balance：负载均衡 cluster： 集群 master/slave: 主从  The primary purpose of load balancing is to distribute the work load of an application onto multiple computers,">
 
 
 
@@ -131,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.lovezhangli.top/2018/10/07/restful/"/>
+  <link rel="canonical" href="http://blog.lovezhangli.top/2018/10/10/load-balance/"/>
 
 
 
 
 
-  <title>谈restful | Xu He's blog</title>
+  <title>load-balance | Xu He's blog</title>
   
 
 
@@ -270,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.lovezhangli.top/2018/10/07/restful/">
+    <link itemprop="mainEntityOfPage" href="http://blog.lovezhangli.top/2018/10/10/load-balance/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xu He">
@@ -287,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">谈restful</h1>
+          <h1 class="post-title" itemprop="name headline">load-balance</h1>
         
 
         <div class="post-meta">
@@ -299,8 +302,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-07T22:12:02+08:00">
-                2018-10-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-10T13:21:41+08:00">
+                2018-10-10
               </time>
             
 
@@ -337,7 +340,21 @@
       
 
       
-        
+        <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><pre></pre></p>
+<ul>
+<li>redundancy/failover: 冗余，故障转移</li>
+<li>HA： 高可用</li>
+<li>load-balance：负载均衡</li>
+<li>cluster： 集群</li>
+<li>master/slave: 主从<br><blockquote>
+</blockquote>
+The primary purpose of load balancing is to distribute the work load of an application onto multiple computers, so the application can process a higher work load. Load balancing is a way to scale an application.<blockquote>
+</blockquote>
+A secondary goal of load balancing is often (but not always) to provide redundancy in your application. That is, if one server in a cluster of servers fail, the load balancer can temporarily remove that server from the cluster, and divide the load onto the functioning servers. Having multiple servers help each other in this way is typically called “redundancy”. When an error happens and the tasks is moved from the failing server to a functioning server, this is typically called “failover”.<blockquote>
+</blockquote>
+A set of servers running the same application in cooperation is typically referred to as a “cluster” of servers. The purpose of a cluster is typically both of the above two mentioned goals: To distribute load onto different servers, and to provide redundancy / failover for each other.</li>
+</ul>
+
       
     </div>
     
@@ -367,8 +384,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/05/spring-cloud-zookeeper/" rel="next" title="spring-cloud-zookeeper">
-                <i class="fa fa-chevron-left"></i> spring-cloud-zookeeper
+              <a href="/2018/10/10/java-proxy/" rel="next" title="java-proxy">
+                <i class="fa fa-chevron-left"></i> java-proxy
               </a>
             
           </div>
@@ -376,10 +393,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/07/api-signature/" rel="prev" title="接口签名">
-                接口签名 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -433,8 +446,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/xuhe.jpeg"
@@ -513,6 +535,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

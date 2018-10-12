@@ -270,6 +270,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.lovezhangli.top/2018/10/10/load-balance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xu He">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/xuhe.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xu He's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/10/load-balance/" itemprop="url">load-balance</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-10T13:21:41+08:00">
+                2018-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><pre></pre></p>
+<ul>
+<li>redundancy/failover: 冗余，故障转移</li>
+<li>HA： 高可用</li>
+<li>load-balance：负载均衡</li>
+<li>cluster： 集群</li>
+<li>master/slave: 主从<br><blockquote>
+</blockquote>
+The primary purpose of load balancing is to distribute the work load of an application onto multiple computers, so the application can process a higher work load. Load balancing is a way to scale an application.<blockquote>
+</blockquote>
+A secondary goal of load balancing is often (but not always) to provide redundancy in your application. That is, if one server in a cluster of servers fail, the load balancer can temporarily remove that server from the cluster, and divide the load onto the functioning servers. Having multiple servers help each other in this way is typically called “redundancy”. When an error happens and the tasks is moved from the failing server to a functioning server, this is typically called “failover”.<blockquote>
+</blockquote>
+A set of servers running the same application in cooperation is typically referred to as a “cluster” of servers. The purpose of a cluster is typically both of the above two mentioned goals: To distribute load onto different servers, and to provide redundancy / failover for each other.</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.lovezhangli.top/2018/10/10/java-proxy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1345,161 +1478,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.lovezhangli.top/2018/10/01/gateway-success/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xu He">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/xuhe.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xu He's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/01/gateway-success/" itemprop="url">Spring cloud —— Zuul</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-01T11:28:11+08:00">
-                2018-10-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在这普天同庆的日子，祝祖国生日快乐！</p>
-<p>下面我宣布个重磅消息：</p>
-<p>经过2天的努力，终于在昨天晚上8点多，成功搭建了公司的微服务架构，成就感满满，mark下，哈哈😄</p>
-<p>下面就重点介绍下思路：</p>
-<ul>
-<li><p>技术选型</p>
-<p>  由于本人没有在阿里系的公司工作过，所以选用的是<a href="https://cloud.spring.io/spring-cloud-netflix/" target="_blank" rel="noopener">spring-cloud-netflix</a>这套，开玩笑的，有时间的话再试着学习Ali Dubbo，毕竟也是很牛逼的，进入了apache基金会。</p>
-<p>  不吹了，切入正题，spring cloud这套还是博大精深的，涉及了micro-service很多东西，我只是用到了一部分，搭建了基本框架，有时间再挖掘完善。</p>
-<ul>
-<li>eureka：服务注册发现用的就是它</li>
-<li>zuul：网关路由</li>
-<li>ribbon：负载均衡</li>
-</ul>
-</li>
-<li><p>实际路线</p>
-<ul>
-<li><p>用户相关服务</p>
-<p>  由于mobile只传token（安全需要），因此我们的微服务的rest api无法使用，必须通过网关手动转发。<br>  如 wallet/{user_id}</p>
-</li>
-<li><p>其他与用户无关的服务</p>
-<p>  这些服务，就可以通过网关直接调用即可。</p>
-</li>
-<li><p>非java 服务</p>
-<p>  java服务可以自动注册到 Eureka Server，非java服务，如何服务注册呢？当然我们想到的是手动注册，而官方的确是支持<a href="https://github.com/Netflix/eureka/wiki/Eureka-REST-operations" target="_blank" rel="noopener">手动注册</a></p>
-</li>
-</ul>
-</li>
-<li><p>TODO</p>
-<ul>
-<li>eureka server多实例</li>
-<li>spring cloud配置中心</li>
-<li>ribbon</li>
-<li>hystrix</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1552,7 +1530,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

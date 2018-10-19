@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="Xu He&#39;s blog">
 <meta property="og:description" content="Buffer分类ByteBuffer官方文档：   A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon it.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-19T10:02:02.654Z">
+<meta property="og:updated_time" content="2018-10-19T10:06:51.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NIO之buffer">
 <meta name="twitter:description" content="Buffer分类ByteBuffer官方文档：   A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon it.">
@@ -375,9 +375,8 @@
 
 <p>结论：</p>
 <blockquote>
-</blockquote>
 <p>可以看出，Cleaner 继承了PhantomReference（虚引用），Cleaner通过this关键字 虚引用了DirectByteBuffer对象，DirectByteBuffer对象被回收时会通知Cleaner,Cleaner收到通知调用clean()方法回收内存（通过JNI Unsafe)</p>
-
+</blockquote>
 </li>
 </ul>
 </li>

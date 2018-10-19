@@ -376,9 +376,8 @@
 
 <p>结论：</p>
 <blockquote>
-</blockquote>
 <p>可以看出，Cleaner 继承了PhantomReference（虚引用），Cleaner通过this关键字 虚引用了DirectByteBuffer对象，DirectByteBuffer对象被回收时会通知Cleaner,Cleaner收到通知调用clean()方法回收内存（通过JNI Unsafe)</p>
-
+</blockquote>
 </li>
 </ul>
 </li>

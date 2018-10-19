@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="进程与线程进程与线程属于操作系统知识范畴，这里仅仅做个概述：   程序：存储在磁盘上某个目录中的可执行文件。 进程：程序的执行实例，如word程序，运行后就是一个word进程，是资源分配的最小单位 线程：程序执行的最小单位，一个进程内的多个线程共享同一地址空间。 1个程序 ==&amp;gt; 1个进程==&amp;gt; n个线程   linux内存管理内存管理是个很复杂的过程，如果展开来说不是一篇文章就能说得">
+<meta name="description" content="进程与线程进程与线程属于操作系统知识范畴，这里仅仅做个概述：   程序：存储在磁盘上某个目录中的可执行文件。 进程：程序的执行实例，如word程序，运行后就是一个word进程，是资源分配的最小单位 线程：程序执行的最小单位，一个进程内的多个线程共享同一地址空间。 1个程序 ==&amp;gt; 1个进程==&amp;gt; n个线程">
 <meta name="keywords" content="Linux,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 进程虚拟地址空间">
 <meta property="og:url" content="http://blog.lovezhangli.top/2018/09/27/linux-process-virtual-addr-space/index.html">
 <meta property="og:site_name" content="Xu He&#39;s blog">
-<meta property="og:description" content="进程与线程进程与线程属于操作系统知识范畴，这里仅仅做个概述：   程序：存储在磁盘上某个目录中的可执行文件。 进程：程序的执行实例，如word程序，运行后就是一个word进程，是资源分配的最小单位 线程：程序执行的最小单位，一个进程内的多个线程共享同一地址空间。 1个程序 ==&amp;gt; 1个进程==&amp;gt; n个线程   linux内存管理内存管理是个很复杂的过程，如果展开来说不是一篇文章就能说得">
+<meta property="og:description" content="进程与线程进程与线程属于操作系统知识范畴，这里仅仅做个概述：   程序：存储在磁盘上某个目录中的可执行文件。 进程：程序的执行实例，如word程序，运行后就是一个word进程，是资源分配的最小单位 线程：程序执行的最小单位，一个进程内的多个线程共享同一地址空间。 1个程序 ==&amp;gt; 1个进程==&amp;gt; n个线程">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://blog.lovezhangli.top/pics/linux-process.jpg">
-<meta property="og:updated_time" content="2018-10-12T10:19:59.500Z">
+<meta property="og:updated_time" content="2018-10-19T10:17:54.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 进程虚拟地址空间">
-<meta name="twitter:description" content="进程与线程进程与线程属于操作系统知识范畴，这里仅仅做个概述：   程序：存储在磁盘上某个目录中的可执行文件。 进程：程序的执行实例，如word程序，运行后就是一个word进程，是资源分配的最小单位 线程：程序执行的最小单位，一个进程内的多个线程共享同一地址空间。 1个程序 ==&amp;gt; 1个进程==&amp;gt; n个线程   linux内存管理内存管理是个很复杂的过程，如果展开来说不是一篇文章就能说得">
+<meta name="twitter:description" content="进程与线程进程与线程属于操作系统知识范畴，这里仅仅做个概述：   程序：存储在磁盘上某个目录中的可执行文件。 进程：程序的执行实例，如word程序，运行后就是一个word进程，是资源分配的最小单位 线程：程序执行的最小单位，一个进程内的多个线程共享同一地址空间。 1个程序 ==&amp;gt; 1个进程==&amp;gt; n个线程">
 <meta name="twitter:image" content="http://blog.lovezhangli.top/pics/linux-process.jpg">
 
 
@@ -348,7 +348,8 @@
 <li>程序：存储在磁盘上某个目录中的可执行文件。</li>
 <li>进程：程序的执行实例，如word程序，运行后就是一个word进程，是<strong>资源分配的最小单位</strong></li>
 <li>线程：<strong>程序执行的最小单位</strong>，一个进程内的多个线程共享同一地址空间。</li>
-<li>1个程序 ==&gt; 1个进程==&gt; n个线程</li>
+<li>1个程序 ==&gt; 1个进程==&gt; n个线程<a id="more"></a>
+</li>
 </ul>
 </blockquote>
 <h3 id="linux内存管理"><a href="#linux内存管理" class="headerlink" title="linux内存管理"></a>linux内存管理</h3><p>内存管理是个很复杂的过程，如果展开来说不是一篇文章就能说得清楚的，这里仅仅为进程空间做个背景介绍：</p>

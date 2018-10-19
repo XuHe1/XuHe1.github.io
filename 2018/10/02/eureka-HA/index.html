@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="好吧，我承认，我一旦学习起来会上瘾的，连我自己都害怕（此处有装逼嫌疑）！ 昨天搭建的微服务框架，最后留了个TODO LIST里面提到HA(high Availability)，最后没控制住自己，晚上还是搞起来了。 刚刚跑起来，趁着热，就写进了博客，记录下再这个过程踩过的坑： 官方的文档指出配置HA关键：     By default every Eureka server is also a Eu">
+<meta name="description" content="好吧，我承认，我一旦学习起来会上瘾的，连我自己都害怕（此处有装逼嫌疑）！ 昨天搭建的微服务框架，最后留了个TODO LIST里面提到HA(high Availability)，最后没控制住自己，晚上还是搞起来了。 刚刚跑起来，趁着热，就写进了博客，记录下再这个过程踩过的坑：">
 <meta name="keywords" content="MSA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Eureka-HA">
 <meta property="og:url" content="http://blog.lovezhangli.top/2018/10/02/eureka-HA/index.html">
 <meta property="og:site_name" content="Xu He&#39;s blog">
-<meta property="og:description" content="好吧，我承认，我一旦学习起来会上瘾的，连我自己都害怕（此处有装逼嫌疑）！ 昨天搭建的微服务框架，最后留了个TODO LIST里面提到HA(high Availability)，最后没控制住自己，晚上还是搞起来了。 刚刚跑起来，趁着热，就写进了博客，记录下再这个过程踩过的坑： 官方的文档指出配置HA关键：     By default every Eureka server is also a Eu">
+<meta property="og:description" content="好吧，我承认，我一旦学习起来会上瘾的，连我自己都害怕（此处有装逼嫌疑）！ 昨天搭建的微服务框架，最后留了个TODO LIST里面提到HA(high Availability)，最后没控制住自己，晚上还是搞起来了。 刚刚跑起来，趁着热，就写进了博客，记录下再这个过程踩过的坑：">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://blog.lovezhangli.top/pics/cancel-service.jpg">
-<meta property="og:updated_time" content="2018-10-12T10:20:13.485Z">
+<meta property="og:updated_time" content="2018-10-19T10:17:15.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Eureka-HA">
-<meta name="twitter:description" content="好吧，我承认，我一旦学习起来会上瘾的，连我自己都害怕（此处有装逼嫌疑）！ 昨天搭建的微服务框架，最后留了个TODO LIST里面提到HA(high Availability)，最后没控制住自己，晚上还是搞起来了。 刚刚跑起来，趁着热，就写进了博客，记录下再这个过程踩过的坑： 官方的文档指出配置HA关键：     By default every Eureka server is also a Eu">
+<meta name="twitter:description" content="好吧，我承认，我一旦学习起来会上瘾的，连我自己都害怕（此处有装逼嫌疑）！ 昨天搭建的微服务框架，最后留了个TODO LIST里面提到HA(high Availability)，最后没控制住自己，晚上还是搞起来了。 刚刚跑起来，趁着热，就写进了博客，记录下再这个过程踩过的坑：">
 <meta name="twitter:image" content="http://blog.lovezhangli.top/pics/cancel-service.jpg">
 
 
@@ -344,7 +344,7 @@
       
         <p>好吧，我承认，我一旦学习起来会上瘾的，连我自己都害怕（此处有装逼嫌疑）！</p>
 <p>昨天搭建的微服务框架，最后留了个TODO LIST里面提到HA(high Availability)，最后没控制住自己，晚上还是搞起来了。</p>
-<p>刚刚跑起来，趁着热，就写进了博客，记录下再这个过程踩过的坑：</p>
+<p>刚刚跑起来，趁着热，就写进了博客，记录下再这个过程踩过的坑：<br><a id="more"></a></p>
 <p><a href="http://cloud.spring.io/spring-cloud-netflix/1.4.x/single/spring-cloud-netflix.html#spring-cloud-eureka-server-zones-and-regions" target="_blank" rel="noopener">官方的文档</a>指出配置HA关键：</p>
 <p></p><p><br>    By default every Eureka server is also a Eureka client and requires (at least one) service URL to locate a peer. If you don’t provide it the service will run and work, but it will shower your logs with a lot of noise about not being able to register with the peer.</p>
 <p></p><br>是时候展现英语功底的时候了（开玩笑的，英语不怎么太好的童鞋，可以粘贴到google翻译），主要意思就是：Eureka Server同时也是Eureka Client，配置对等节点时，只需要像我们注册服务时，配置个serviceUrl指向对等节点地址即可。<p></p>

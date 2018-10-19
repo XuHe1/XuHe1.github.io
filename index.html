@@ -343,7 +343,7 @@
           
             <h3 id="Buffer分类"><a href="#Buffer分类" class="headerlink" title="Buffer分类"></a>Buffer分类</h3><p>ByteBuffer官方文档：</p>
 <blockquote>
-<p> </p><p><br>     A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon it.  That is, it will attempt to avoid copying the buffer’s content to (or from) an intermediate buffer before (or after) each invocation of one of the underlying operating system’s native I/O operations.<br>     </p><p></p>
+ <p>A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon it.  That is, it will attempt to avoid copying the buffer’s content to (or from) an intermediate buffer before (or after) each invocation of one of the underlying operating system’s native I/O operations.</p>
 </blockquote>
 <p>根据文档，可将buffer分为两种：    </p>
 <ul>
@@ -364,7 +364,7 @@
 </li>
 <li><p>堆外内存回收</p>
 <ul>
-<li><p>new DirectByteBuffer对象时在java heap上分配了   </p>
+<li><p>new DirectByteBuffer对象时在java heap上分配的内存 </p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static ByteBuffer allocateDirect(int capacity) &#123;</span><br><span class="line">    return new DirectByteBuffer(capacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>

@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="Buffer分类 Direct: java heap内存 Non-Direct:堆外内存  Direct Buffer 堆外内存（native 堆）   任何涉及到文件的读取和写入都会涉及到堆内内存和对外内存的数据拷贝。  文件读取  内核读取数据到堆外内存，堆外内存将数据拷贝到堆内内存  文件写入  程序将读取堆内内存数据，写入堆外内存，内核再将数据写入文件     ByteBuffer源码是如">
+<meta name="description" content="Buffer分类   ByteBuffer官方文档：        A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly u">
 <meta name="keywords" content="IO,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NIO之buffer">
 <meta property="og:url" content="http://blog.lovezhangli.top/2018/10/19/nio-buffer/index.html">
 <meta property="og:site_name" content="Xu He&#39;s blog">
-<meta property="og:description" content="Buffer分类 Direct: java heap内存 Non-Direct:堆外内存  Direct Buffer 堆外内存（native 堆）   任何涉及到文件的读取和写入都会涉及到堆内内存和对外内存的数据拷贝。  文件读取  内核读取数据到堆外内存，堆外内存将数据拷贝到堆内内存  文件写入  程序将读取堆内内存数据，写入堆外内存，内核再将数据写入文件     ByteBuffer源码是如">
+<meta property="og:description" content="Buffer分类   ByteBuffer官方文档：        A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly u">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-19T07:37:10.132Z">
+<meta property="og:updated_time" content="2018-10-19T07:46:29.872Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NIO之buffer">
-<meta name="twitter:description" content="Buffer分类 Direct: java heap内存 Non-Direct:堆外内存  Direct Buffer 堆外内存（native 堆）   任何涉及到文件的读取和写入都会涉及到堆内内存和对外内存的数据拷贝。  文件读取  内核读取数据到堆外内存，堆外内存将数据拷贝到堆内内存  文件写入  程序将读取堆内内存数据，写入堆外内存，内核再将数据写入文件     ByteBuffer源码是如">
+<meta name="twitter:description" content="Buffer分类   ByteBuffer官方文档：        A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly u">
 
 
 
@@ -340,7 +340,11 @@
       
 
       
-        <h3 id="Buffer分类"><a href="#Buffer分类" class="headerlink" title="Buffer分类"></a>Buffer分类</h3><ul>
+        <h3 id="Buffer分类"><a href="#Buffer分类" class="headerlink" title="Buffer分类"></a>Buffer分类</h3><p>   ByteBuffer官方文档：</p>
+<blockquote>
+<p> </p><p><br>     A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon it.  That is, it will attempt to avoid copying the buffer’s content to (or from) an intermediate buffer before (or after) each invocation of one of the underlying operating system’s native I/O operations.<br>     </p><p></p>
+</blockquote>
+<ul>
 <li>Direct: java heap内存</li>
 <li>Non-Direct:堆外内存</li>
 </ul>
@@ -356,30 +360,24 @@
 </li>
 </ol>
 </li>
-</ul>
-<pre><code>ByteBuffer源码是如何说的？
-</code></pre><blockquote>
-<pre><code>A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon it.  That is, it will
-attempt to avoid copying the buffer&apos;s content to (or from) an intermediate buffer before (or after) each invocation of one of
-the underlying operating system&apos;s native I/O operations.       
-</code></pre></blockquote>
+<li><p>堆外内存回收</p>
 <ul>
-<li><p>对外内存回收</p>
-<ol>
 <li><p>new DirectByteBuffer对象时在java heap上分配了   </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static ByteBuffer allocateDirect(int capacity) &#123;</span><br><span class="line">    return new DirectByteBuffer(capacity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查看DirectByteBuffer源码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">    DirectByteBuffer(int cap) &#123;                   // package-private</span><br><span class="line"></span><br><span class="line">        super(-1, 0, cap, cap);</span><br><span class="line">        boolean pa = VM.isDirectMemoryPageAligned();</span><br><span class="line">        int ps = Bits.pageSize();</span><br><span class="line">        long size = Math.max(1L, (long)cap + (pa ? ps : 0));</span><br><span class="line">        Bits.reserveMemory(size, cap);</span><br><span class="line"></span><br><span class="line">        long base = 0;</span><br><span class="line">        try &#123;</span><br><span class="line">            base = unsafe.allocateMemory(size);</span><br><span class="line">        &#125; catch (OutOfMemoryError x) &#123;</span><br><span class="line">            Bits.unreserveMemory(size, cap);</span><br><span class="line">            throw x;</span><br><span class="line">        &#125;</span><br><span class="line">        unsafe.setMemory(base, size, (byte) 0);</span><br><span class="line">        if (pa &amp;&amp; (base % ps != 0)) &#123;</span><br><span class="line">            // Round up to page boundary</span><br><span class="line">            address = base + ps - (base &amp; (ps - 1));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            address = base;</span><br><span class="line">        &#125;</span><br><span class="line">        cleaner = Cleaner.create(this, new Deallocator(base, size, cap));</span><br><span class="line">        att = null;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重点在倒数第二行代码 <code>Cleaner</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class Cleaner extends PhantomReference&lt;Object&gt; &#123;</span><br></pre></td></tr></table></figure>
-<p>Cleaner 继承了PhantomReference（虚引用），Cleaner通过this关键字 虚引用了DirectByteBuffer对象，DirectByteBuffer对象被回收时会通知Cleaner,Cleaner收到通知调用clean()方法回收内存（通过JNI Unsafe)</p>
-</li>
-</ol>
+</ul>
 </li>
 </ul>
-<h4 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h4><ul>
+<pre><code>* 查看DirectByteBuffer源码
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">    DirectByteBuffer(int cap) &#123;                   // package-private</span><br><span class="line"></span><br><span class="line">        super(-1, 0, cap, cap);</span><br><span class="line">        boolean pa = VM.isDirectMemoryPageAligned();</span><br><span class="line">        int ps = Bits.pageSize();</span><br><span class="line">        long size = Math.max(1L, (long)cap + (pa ? ps : 0));</span><br><span class="line">        Bits.reserveMemory(size, cap);</span><br><span class="line"></span><br><span class="line">        long base = 0;</span><br><span class="line">        try &#123;</span><br><span class="line">            base = unsafe.allocateMemory(size);</span><br><span class="line">        &#125; catch (OutOfMemoryError x) &#123;</span><br><span class="line">            Bits.unreserveMemory(size, cap);</span><br><span class="line">            throw x;</span><br><span class="line">        &#125;</span><br><span class="line">        unsafe.setMemory(base, size, (byte) 0);</span><br><span class="line">        if (pa &amp;&amp; (base % ps != 0)) &#123;</span><br><span class="line">            // Round up to page boundary</span><br><span class="line">            address = base + ps - (base &amp; (ps - 1));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            address = base;</span><br><span class="line">        &#125;</span><br><span class="line">        cleaner = Cleaner.create(this, new Deallocator(base, size, cap));</span><br><span class="line">        att = null;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+* 重点在倒数第二行代码 `Cleaner`
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class Cleaner extends PhantomReference&lt;Object&gt; &#123;</span><br></pre></td></tr></table></figure>
+
+Cleaner 继承了PhantomReference（虚引用），Cleaner通过this关键字 虚引用了DirectByteBuffer对象，DirectByteBuffer对象被回收时会通知Cleaner,Cleaner收到通知调用clean()方法回收内存（通过JNI Unsafe)
+</code></pre><h4 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h4><ul>
 <li><p>native 本地化是什么概念？</p>
 <p>  JNI （Java本地接口）是一种编程框架，使得Java虚拟机中的Java程序可以调用本地应用/或库，也可以被其他程序调用。 ==本地程序==一般是用其它语言（C、C++或汇编语言等）编写的，并且被编译为==基于本机硬件和操作系统的程序==。[1]</p>
 <ul>

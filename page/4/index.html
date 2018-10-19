@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="IO," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -94,21 +94,13 @@
 
 
 
-<meta name="description" content="All is blocking从严格意义上说，所有的请求都是阻塞的，原因是所有的请求发出去之后都会等待，只是等待时长多少而已，这点希望大家明白。阻塞与非阻塞实际上就是阻塞的时间长短不同。 Blocking vs Non-Blocking两者不同之处在于请求（或方法调用）无法正常处理时的行为:    Blocking-mode：客户端线程会一直阻塞等待返回； Non-Blocking: 服务端会立即">
-<meta name="keywords" content="IO">
-<meta property="og:type" content="article">
-<meta property="og:title" content="深入理解Java NIO">
-<meta property="og:url" content="http://blog.lovezhangli.top/2018/09/26/nio/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Xu He&#39;s blog">
+<meta property="og:url" content="http://blog.lovezhangli.top/page/4/index.html">
 <meta property="og:site_name" content="Xu He&#39;s blog">
-<meta property="og:description" content="All is blocking从严格意义上说，所有的请求都是阻塞的，原因是所有的请求发出去之后都会等待，只是等待时长多少而已，这点希望大家明白。阻塞与非阻塞实际上就是阻塞的时间长短不同。 Blocking vs Non-Blocking两者不同之处在于请求（或方法调用）无法正常处理时的行为:    Blocking-mode：客户端线程会一直阻塞等待返回； Non-Blocking: 服务端会立即">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://blog.lovezhangli.top/pics/blocking.jpg">
-<meta property="og:image" content="http://blog.lovezhangli.top/pics/non-blocking.jpg">
-<meta property="og:updated_time" content="2018-10-19T06:58:56.771Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入理解Java NIO">
-<meta name="twitter:description" content="All is blocking从严格意义上说，所有的请求都是阻塞的，原因是所有的请求发出去之后都会等待，只是等待时长多少而已，这点希望大家明白。阻塞与非阻塞实际上就是阻塞的时间长短不同。 Blocking vs Non-Blocking两者不同之处在于请求（或方法调用）无法正常处理时的行为:    Blocking-mode：客户端线程会一直阻塞等待返回； Non-Blocking: 服务端会立即">
-<meta name="twitter:image" content="http://blog.lovezhangli.top/pics/blocking.jpg">
+<meta name="twitter:title" content="Xu He&#39;s blog">
 
 
 
@@ -137,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.lovezhangli.top/2018/09/26/nio/"/>
+  <link rel="canonical" href="http://blog.lovezhangli.top/page/4/"/>
 
 
 
 
 
-  <title>深入理解Java NIO | Xu He's blog</title>
+  <title>Xu He's blog</title>
   
 
 
@@ -168,7 +160,9 @@
     
   
 
-  <div class="container sidebar-position-right page-post-detail ">
+  <div class="container sidebar-position-right 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -261,9 +255,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -293,7 +287,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深入理解Java NIO</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/26/nio/" itemprop="url">深入理解Java NIO</a></h1>
         
 
         <div class="post-meta">
@@ -343,7 +339,9 @@
       
 
       
-        <h3 id="All-is-blocking"><a href="#All-is-blocking" class="headerlink" title="All is blocking"></a>All is blocking</h3><p>从严格意义上说，所有的请求都是阻塞的，原因是所有的请求发出去之后都会等待，只是等待时长多少而已，这点希望大家明白。<br>阻塞与非阻塞实际上就是阻塞的时间长短不同。</p>
+        
+          
+            <h3 id="All-is-blocking"><a href="#All-is-blocking" class="headerlink" title="All is blocking"></a>All is blocking</h3><p>从严格意义上说，所有的请求都是阻塞的，原因是所有的请求发出去之后都会等待，只是等待时长多少而已，这点希望大家明白。<br>阻塞与非阻塞实际上就是阻塞的时间长短不同。</p>
 <h3 id="Blocking-vs-Non-Blocking"><a href="#Blocking-vs-Non-Blocking" class="headerlink" title="Blocking vs Non-Blocking"></a>Blocking vs Non-Blocking</h3><p>两者不同之处在于请求（或方法调用）无法正常处理时的行为:</p>
 <blockquote>
 </blockquote>
@@ -371,6 +369,8 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">private static void query(String host) throws IOException &#123;</span><br><span class="line">    InetSocketAddress isa</span><br><span class="line">            = new InetSocketAddress(InetAddress.getByName(host), port);</span><br><span class="line">    SocketChannel sc = null;</span><br><span class="line">    // Direct byte buffer for reading</span><br><span class="line">    ByteBuffer dbuf = ByteBuffer.allocateDirect(1024);</span><br><span class="line">    try &#123;</span><br><span class="line"></span><br><span class="line">        // Connect</span><br><span class="line">        sc = SocketChannel.open();</span><br><span class="line">        sc.configureBlocking(false); //</span><br><span class="line">        sc.connect(isa); // non-blocking: connect() return right now, may fail to connect, must call next step</span><br><span class="line">        sc.finishConnect();</span><br><span class="line">        System.out.println(sc.isBlocking());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        // Read the time from the remote host.  For simplicity we assume</span><br><span class="line">        // that the time comes back to us in a single packet, so that we</span><br><span class="line">        // only need to read once.</span><br><span class="line">        dbuf.clear();</span><br><span class="line">        sc.read(dbuf); // non-block: 立即返回， block: 阻塞直到读取到内容</span><br><span class="line">        // Print the remote address and the received time</span><br><span class="line">        dbuf.flip();  // 复位，读操作需要复位</span><br><span class="line">        CharBuffer cb = decoder.decode(dbuf);</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + &quot; : &quot; + cb);</span><br><span class="line"></span><br><span class="line">        System.out.println(Thread.currentThread().getName() + &quot;: Do next thing&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        // Make sure we close the channel (and hence the socket)</span><br><span class="line">        if (sc != null)</span><br><span class="line">            sc.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    private static void acceptConnections(int port) throws Exception &#123;</span><br><span class="line">    // Selector for incoming time requests</span><br><span class="line">    Selector acceptSelector = SelectorProvider.provider().openSelector();</span><br><span class="line"></span><br><span class="line">    // Create a new server socket and set to non blocking mode</span><br><span class="line">    ServerSocketChannel ssc = ServerSocketChannel.open();</span><br><span class="line">    ssc.configureBlocking(false);</span><br><span class="line"></span><br><span class="line">    // todo: multiply serverSocketChannel ?</span><br><span class="line">    ServerSocketChannel ssc1 = ServerSocketChannel.open();</span><br><span class="line">    ssc1.configureBlocking(false);</span><br><span class="line">    // 只有一个ServerSocketChannel</span><br><span class="line">    System.out.println(&quot;ssc: &quot; + ssc);</span><br><span class="line">    System.out.println(&quot;ssc1: &quot; + ssc1);</span><br><span class="line">    // Bind the server socket to the local host and port</span><br><span class="line"></span><br><span class="line">    InetAddress lh = InetAddress.getLocalHost();</span><br><span class="line">    InetSocketAddress isa = new InetSocketAddress(lh, port);</span><br><span class="line">    ssc.socket().bind(isa);</span><br><span class="line"></span><br><span class="line">    // Register accepts on the server socket with the selector. This</span><br><span class="line">    // step tells the selector that the socket wants to be put on the</span><br><span class="line">    // ready list when accept operations occur, so allowing multiplexed</span><br><span class="line">    // non-blocking I/O to take place.</span><br><span class="line">    SelectionKey acceptKey = ssc.register(acceptSelector,</span><br><span class="line">            SelectionKey.OP_ACCEPT);</span><br><span class="line"></span><br><span class="line">    // selectionKey represent the registration of a selectable channel</span><br><span class="line">    System.out.println(acceptKey);</span><br><span class="line"></span><br><span class="line">    ssc1.register(acceptSelector, SelectionKey.OP_ACCEPT);</span><br><span class="line"></span><br><span class="line">    int keysAdded = 0;</span><br><span class="line">    System.out.println(&quot;waiting connecting....&quot;);</span><br><span class="line">    // Here&apos;s where everything happens. The select method will</span><br><span class="line">    // return when any operations registered above have occurred, the</span><br><span class="line">    // thread has been interrupted, etc.</span><br><span class="line"></span><br><span class="line">    while ((keysAdded = acceptSelector.select()) &gt; 0) &#123;</span><br><span class="line">        System.out.println(keysAdded);</span><br><span class="line">        // Someone is ready for I/O, get the ready keys</span><br><span class="line">        Set readyKeys = acceptSelector.selectedKeys();</span><br><span class="line">        Iterator i = readyKeys.iterator();</span><br><span class="line"></span><br><span class="line">        // Walk through the ready keys collection and process date requests.</span><br><span class="line">        while (i.hasNext()) &#123;</span><br><span class="line">            SelectionKey sk = (SelectionKey)i.next();</span><br><span class="line">            System.out.println(sk); // equal to acceptKey</span><br><span class="line">            i.remove();</span><br><span class="line">            // The key indexes into the selector so you</span><br><span class="line">            // can retrieve the socket that&apos;s ready for I/O</span><br><span class="line">            ServerSocketChannel nextReady =</span><br><span class="line">                    (ServerSocketChannel)sk.channel();</span><br><span class="line">            System.out.println(&quot;nextReady: &quot; + nextReady);</span><br><span class="line">            // Accept the date request and send back the date string</span><br><span class="line">            Date now = new Date();</span><br><span class="line">            // write the current timestamp to buffer</span><br><span class="line">            ByteBuffer writeBuf = ByteBuffer.allocateDirect(1024);</span><br><span class="line">            writeBuf.putLong(now.getTime());</span><br><span class="line"></span><br><span class="line">            SocketChannel socketChannel = nextReady.accept();</span><br><span class="line">            socketChannel.configureBlocking(false);</span><br><span class="line">           // Thread.sleep(10000l); // block client, client won&apos;t block</span><br><span class="line">            // socketChannel.write(encoder.encode(CharBuffer.wrap(now.toString() + &quot;\r\n&quot;)));</span><br><span class="line">            StringBuffer sb = new StringBuffer(now.toString());</span><br><span class="line">            for (int j = 0; j &lt; 1000; j++) &#123;</span><br><span class="line">                sb.append(now.toString());</span><br><span class="line">            &#125;</span><br><span class="line">            int written = socketChannel.write(encoder.encode(CharBuffer.wrap(sb.toString() + &quot;\r\n&quot;)));</span><br><span class="line">            System.out.println(&quot;written: &quot; + written);</span><br><span class="line">            System.out.println(&quot;Do next thing&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+          
+        
       
     </div>
     
@@ -385,36 +385,14 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/IO/" rel="tag"># IO</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/26/miss-my-baby/" rel="prev" title="甜蜜的负担">
-                甜蜜的负担 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -424,11 +402,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
 
 
           </div>
@@ -436,10 +417,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -462,17 +439,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/xuhe.jpeg"
@@ -551,22 +519,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#All-is-blocking"><span class="nav-number">1.</span> <span class="nav-text">All is blocking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Blocking-vs-Non-Blocking"><span class="nav-number">2.</span> <span class="nav-text">Blocking vs Non-Blocking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIO-vs-NIO"><span class="nav-number">3.</span> <span class="nav-text">BIO vs NIO</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -680,10 +632,10 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-
+  
 
   
 

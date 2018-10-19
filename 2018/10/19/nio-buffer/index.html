@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="Buffer分类   ByteBuffer官方文档：        A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly u">
+<meta name="description" content="Buffer分类ByteBuffer官方文档：        A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon">
 <meta name="keywords" content="IO,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NIO之buffer">
 <meta property="og:url" content="http://blog.lovezhangli.top/2018/10/19/nio-buffer/index.html">
 <meta property="og:site_name" content="Xu He&#39;s blog">
-<meta property="og:description" content="Buffer分类   ByteBuffer官方文档：        A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly u">
+<meta property="og:description" content="Buffer分类ByteBuffer官方文档：        A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-19T07:49:41.590Z">
+<meta property="og:updated_time" content="2018-10-19T08:07:10.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NIO之buffer">
-<meta name="twitter:description" content="Buffer分类   ByteBuffer官方文档：        A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly u">
+<meta name="twitter:description" content="Buffer分类ByteBuffer官方文档：        A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon">
 
 
 
@@ -340,10 +340,11 @@
       
 
       
-        <h3 id="Buffer分类"><a href="#Buffer分类" class="headerlink" title="Buffer分类"></a>Buffer分类</h3><p>   ByteBuffer官方文档：</p>
+        <h3 id="Buffer分类"><a href="#Buffer分类" class="headerlink" title="Buffer分类"></a>Buffer分类</h3><p>ByteBuffer官方文档：</p>
 <blockquote>
 <p> </p><p><br>     A byte buffer is either direct or non-direct. Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon it.  That is, it will attempt to avoid copying the buffer’s content to (or from) an intermediate buffer before (or after) each invocation of one of the underlying operating system’s native I/O operations.<br>     </p><p></p>
 </blockquote>
+<p>根据文档，可将buffer分为两种：    </p>
 <ul>
 <li>Direct: java heap内存</li>
 <li>Non-Direct:堆外内存</li>
@@ -377,7 +378,8 @@
 
     <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class Cleaner extends PhantomReference&lt;Object&gt; &#123;</span><br></pre></td></tr></table></figure>
 
-Cleaner 继承了PhantomReference（虚引用），Cleaner通过this关键字 虚引用了DirectByteBuffer对象，DirectByteBuffer对象被回收时会通知Cleaner,Cleaner收到通知调用clean()方法回收内存（通过JNI Unsafe)
+
+    &gt; 可以看出，Cleaner 继承了PhantomReference（虚引用），Cleaner通过this关键字 虚引用了DirectByteBuffer对象，DirectByteBuffer对象被回收时会通知Cleaner,Cleaner收到通知调用clean()方法回收内存（通过JNI Unsafe)
 </code></pre><h4 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h4><ul>
 <li><p>native 本地化是什么概念？</p>
 <p>  JNI （Java本地接口）是一种编程框架，使得Java虚拟机中的Java程序可以调用本地应用/或库，也可以被其他程序调用。 ==本地程序==一般是用其它语言（C、C++或汇编语言等）编写的，并且被编译为==基于本机硬件和操作系统的程序==。[1]</p>

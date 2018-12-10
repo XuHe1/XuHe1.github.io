@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="IO," />
 
 
 
@@ -94,17 +94,18 @@
 
 
 
-<meta name="description" content="Christian, Husband, Father, Software Engineer">
+<meta name="description" content="###背景所有的进程IO操作都分为2个阶段：  进程向内核发起IO请求，内核告诉data或缓存是否ready 内核操作IO外设，在内核空间和进程空间交换数据  BIO和NIO说的是第一阶段，内核的响应是阻塞的还是非阻塞的（是否阻塞进程），同步异步则说的是第二阶段（进程主动轮询IO是否就绪内核主动发送通知信号）。 Unix 5 IO models blocking I/O nonblocking I">
+<meta name="keywords" content="IO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java-spring-aop">
-<meta property="og:url" content="http://blog.lovezhangli.top/2018/09/27/java-spring-aop/index.html">
+<meta property="og:title" content="同步IO与AIO">
+<meta property="og:url" content="http://blog.lovezhangli.top/2018/12/10/aio/index.html">
 <meta property="og:site_name" content="Xu He&#39;s blog">
-<meta property="og:description" content="Christian, Husband, Father, Software Engineer">
+<meta property="og:description" content="###背景所有的进程IO操作都分为2个阶段：  进程向内核发起IO请求，内核告诉data或缓存是否ready 内核操作IO外设，在内核空间和进程空间交换数据  BIO和NIO说的是第一阶段，内核的响应是阻塞的还是非阻塞的（是否阻塞进程），同步异步则说的是第二阶段（进程主动轮询IO是否就绪内核主动发送通知信号）。 Unix 5 IO models blocking I/O nonblocking I">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-27T03:26:23.031Z">
+<meta property="og:updated_time" content="2018-12-10T06:28:45.546Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java-spring-aop">
-<meta name="twitter:description" content="Christian, Husband, Father, Software Engineer">
+<meta name="twitter:title" content="同步IO与AIO">
+<meta name="twitter:description" content="###背景所有的进程IO操作都分为2个阶段：  进程向内核发起IO请求，内核告诉data或缓存是否ready 内核操作IO外设，在内核空间和进程空间交换数据  BIO和NIO说的是第一阶段，内核的响应是阻塞的还是非阻塞的（是否阻塞进程），同步异步则说的是第二阶段（进程主动轮询IO是否就绪内核主动发送通知信号）。 Unix 5 IO models blocking I/O nonblocking I">
 
 
 
@@ -133,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.lovezhangli.top/2018/09/27/java-spring-aop/"/>
+  <link rel="canonical" href="http://blog.lovezhangli.top/2018/12/10/aio/"/>
 
 
 
 
 
-  <title>java-spring-aop | Xu He's blog</title>
+  <title>同步IO与AIO | Xu He's blog</title>
   
 
 
@@ -272,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.lovezhangli.top/2018/09/27/java-spring-aop/">
+    <link itemprop="mainEntityOfPage" href="http://blog.lovezhangli.top/2018/12/10/aio/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xu He">
@@ -289,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java-spring-aop</h1>
+          <h1 class="post-title" itemprop="name headline">同步IO与AIO</h1>
         
 
         <div class="post-meta">
@@ -301,8 +302,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-27T11:26:23+08:00">
-                2018-09-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-10T11:22:45+08:00">
+                2018-12-10
               </time>
             
 
@@ -339,7 +340,20 @@
       
 
       
-        
+        <p>###背景<br>所有的进程IO操作都分为2个阶段：</p>
+<ul>
+<li>进程向内核发起IO请求，内核告诉data或缓存是否ready</li>
+<li>内核操作IO外设，在内核空间和进程空间交换数据</li>
+</ul>
+<p>BIO和NIO说的是第一阶段，内核的响应是阻塞的还是非阻塞的（是否阻塞进程），同步异步则说的是第二阶段（进程主动轮询IO是否就绪内核主动发送通知信号）。</p>
+<h3 id="Unix-5-IO-models"><a href="#Unix-5-IO-models" class="headerlink" title="Unix 5 IO models"></a>Unix 5 IO models</h3><ul>
+<li>blocking I/O</li>
+<li>nonblocking I/O</li>
+<li>I/O multiplexing</li>
+<li>signal-driven I/O</li>
+<li>asynchronous I/O    </li>
+</ul>
+
       
     </div>
     
@@ -354,6 +368,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/IO/" rel="tag"># IO</a>
+          
+        </div>
+      
 
       
       
@@ -363,8 +383,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/27/java-threadPool/" rel="next" title="java-threadPool">
-                <i class="fa fa-chevron-left"></i> java-threadPool
+              <a href="/2018/11/30/mysql-transaction-lock/" rel="next" title="Mysql 锁与事务">
+                <i class="fa fa-chevron-left"></i> Mysql 锁与事务
               </a>
             
           </div>
@@ -372,10 +392,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/27/java-spring-ioc/" rel="prev" title="java-spring-ioc">
-                java-spring-ioc <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -429,8 +445,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/xuhe.jpeg"
@@ -513,6 +538,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unix-5-IO-models"><span class="nav-number">1.</span> <span class="nav-text">Unix 5 IO models</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
